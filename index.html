@@ -5,148 +5,203 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Floating shapes animation */
+        /* Top golden header */
+        header {
+            background-color: #FFD700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            font-weight: bold;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .logo {
+            color: black;
+            font-size: 24px;
+        }
+
+        /* Hamburger button */
+        .hamburger {
+            display: block;
+            cursor: pointer;
+            width: 30px;
+            height: 25px;
+            position: relative;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 4px;
+            background: black;
+            margin: 5px 0;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* Side menu */
+        .side-menu {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            z-index: 101;
+        }
+
+        .side-menu a {
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 22px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .side-menu a:hover {
+            color: gold;
+        }
+
+        .side-menu .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 36px;
+        }
+
+        /* Hero container */
+        .hero-container {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            padding-top: 80px;
+            background-image: url('6caa159a93be95af84cca3ea88c78bcd.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        /* Hero text */
+        .hero-container h1 {
+            font-size: 12vw;
+            margin-bottom: 3vw;
+            color: #FFD700;
+            text-shadow: 0 0 8px #FFD700, 0 0 12px #FFD700, 0 0 16px #FFD700;
+            line-height: 1.1;
+        }
+
+        .hero-container p {
+            font-size: 4vw;
+            margin-bottom: 5vw;
+            color: #ccc;
+        }
+
+        .hero-container a button {
+            padding: 3vw 8vw;
+            font-size: 4vw;
+        }
+
+        /* Floating shapes */
         .shape {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background: gold;
             opacity: 0.7;
-            border-radius: 50%;
             animation: float 8s infinite linear;
         }
-        .shape.triangle {
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-bottom: 25px solid gold;
-            background: none;
-        }
-        .shape.square {
-            width: 25px;
-            height: 25px;
-            border-radius: 4px;
-            background: gold;
-        }
+
+        .shape1 { width: 25px; height: 25px; background: gold; border-radius: 50%; }
+        .shape2 { width: 30px; height: 15px; background: white; border-radius: 4px; transform: rotate(30deg); }
+        .shape3 { width: 20px; height: 40px; background: #FFD700; border-radius: 10%; }
+        .shape4 { width: 35px; height: 20px; background: white; border-radius: 5px; transform: rotate(60deg); }
+        .shape5 { width: 15px; height: 15px; background: gold; border-radius: 0 50% 50% 0; }
+        .shape6 { width: 40px; height: 10px; background: #FFD700; border-radius: 5px; transform: rotate(-30deg); }
+        .shape7 { width: 20px; height: 30px; background: white; border-radius: 10%; }
+
         @keyframes float {
             0% { transform: translateY(100vh) rotate(0deg); opacity: 0.3; }
             50% { opacity: 1; }
             100% { transform: translateY(-100vh) rotate(360deg); opacity: 0.3; }
         }
- /* Hero text default for desktop */
-.hero-container h1 {
-    font-size: 48px;       /* default desktop size */
-    margin-bottom: 15px;
-    z-index: 2;
-    color: #FFD700;        /* bright gold */
-    text-shadow: 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700;
-    line-height: 1.1;
-    text-align: center;
-}
 
-/* Hero container adjustments for mobile */
-.hero-container {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; 
-    align-items: center;
-    text-align: center;
-    overflow: hidden;
-    padding-top: 60px;  /* space from top */
-    z-index: 1;
-    background-image: url('6caa159a93be95af84cca3ea88c78bcd.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-/* MOBILE VIEW: screens smaller than 768px */
-@media screen and (max-width: 768px) {
-    .hero-container h1 {
-        font-size: 36px;   /* smaller for phone */
-        margin-bottom: 10px;
-    }
-
-    .hero-container p {
-        font-size: 16px;   /* adjust paragraph */
-    }
-
-    .hero-container a button {
-        padding: 12px 25px;  /* smaller button for phone */
-        font-size: 14px;
-    }
-}
-}
-
-.hero-container {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* move content a bit higher */
-    align-items: center;
-    text-align: center;
-    overflow: hidden;
-    padding-top: 80px;  /* space from top */
-    z-index: 1;
-    background-image: url('6caa159a93be95af84cca3ea88c78bcd.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
+        /* Floating WhatsApp button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #25D366;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: 0.3s;
+            z-index: 102;
         }
-        .hero-container p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            color: #ccc;
-            z-index: 2;
-        }
-        .hero-container a button {
-            z-index: 2;
-        }
-        .shape { z-index: 0; }
+
+        .whatsapp-btn:hover { transform: scale(1.1); }
+
     </style>
 </head>
 <body>
 
 <header>
-  Vos Créations
-  <nav>
+    <div class="logo">Vos Créations</div>
+    <div class="hamburger" onclick="openMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</header>
+
+<!-- Side menu -->
+<div id="mySideMenu" class="side-menu">
+    <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
     <a href="index.html">Home</a>
     <a href="services.html">Services</a>
     <a href="order.html">Order</a>
     <a href="portfolio.html">Portfolio</a>
-  </nav>
-</header>
-
-<div class="hero-container">
-  <h1>Vos Créations</h1>
-  <p>Creative Designs That Elevate Your Brand</p>
-  <a href="services.html"><button>View Our Services</button></a>
-
-  <!-- Animated shapes -->
-  <div class="shape"></div>
-  <div class="shape triangle"></div>
-  <div class="shape square"></div>
-  <div class="shape"></div>
-  <div class="shape triangle"></div>
-  <div class="shape square"></div>
 </div>
 
-<!-- Floating WhatsApp -->
+<div class="hero-container">
+    <h1>Vos Créations</h1>
+    <p>Creative Designs That Elevate Your Brand</p>
+    <a href="services.html"><button>View Our Services</button></a>
+
+    <!-- 7 floating shapes -->
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+    <div class="shape shape4"></div>
+    <div class="shape shape5"></div>
+    <div class="shape shape6"></div>
+    <div class="shape shape7"></div>
+</div>
+
 <a href="https://wa.me/234906920531" class="whatsapp-btn" target="_blank">WhatsApp</a>
 
 <script>
-  const shapes = document.querySelectorAll('.shape');
-  shapes.forEach(shape => {
-    shape.style.left = Math.random() * window.innerWidth + 'px';
-    shape.style.animationDuration = (5 + Math.random() * 5) + 's';
-    shape.style.width = (10 + Math.random() * 20) + 'px';
-    shape.style.height = (10 + Math.random() * 20) + 'px';
-  });
+    function openMenu() { document.getElementById("mySideMenu").style.width = "250px"; }
+    function closeMenu() { document.getElementById("mySideMenu").style.width = "0"; }
+
+    // Randomize floating shapes initial positions and speed
+    const shapes = document.querySelectorAll('.shape');
+    shapes.forEach(shape => {
+        shape.style.left = Math.random() * window.innerWidth + 'px';
+        shape.style.animationDuration = (5 + Math.random() * 5) + 's';
+    });
 </script>
 
 </body>
