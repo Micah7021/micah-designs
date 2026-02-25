@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Order - Vos Créations</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#fff;overflow-x:hidden;position:relative;}
+header{background-color:#FFD700;display:flex;justify-content:space-between;align-items:center;padding:15px 20px;position:fixed;width:100%;top:0;z-index:100;}
+header .logo{color:black;font-size:24px;font-weight:bold;}
+.hamburger{cursor:pointer;width:30px;height:25px;position:relative;}
+.hamburger span{display:block;height:4px;background:black;margin:5px 0;border-radius:2px;}
+.side-menu{height:100%;width:0;position:fixed;top:0;right:0;background-color:#111;overflow-x:hidden;transition:0.5s;padding-top:60px;z-index:101;}
+.side-menu a{padding:15px 30px;text-decoration:none;font-size:22px;color:white;display:block;transition:0.3s;}
+.side-menu a:hover{color:gold;}
+.side-menu .close-btn{position:absolute;top:20px;right:25px;font-size:36px;}
+.page-container{padding-top:80px;padding-left:15px;padding-right:15px;}
+h1{text-align:center;margin-bottom:20px;color:black;}
+form{max-width:400px;margin:0 auto;display:flex;flex-direction:column;gap:15px;}
+input,textarea,select,button{padding:10px;border-radius:8px;border:1px solid #ccc;font-size:16px;width:100%;}
+button{background:#FFD700;border:none;font-weight:bold;cursor:pointer;}
+button:hover{background:#e6c200;}
+#ball{position:absolute;width:25px;height:25px;background:gold;border-radius:50%;z-index:0;}
+.splash{position:absolute;width:20px;height:20px;border-radius:50%;background:gold;opacity:0.8;animation:fadeSplash 2s forwards;z-index:0;}
+@keyframes fadeSplash{0%{opacity:0.8;}100%{opacity:0;}}
+.emoji{position:absolute;font-size:20px;z-index:0;}
+.whatsapp-btn{position:fixed;bottom:25px;right:25px;background:#25D366;color:white;padding:15px 20px;border-radius:50px;font-weight:bold;text-decoration:none;box-shadow:0 5px 15px rgba(0,0,0,0.3);transition:0.3s;z-index:102;}
+.whatsapp-btn:hover{transform:scale(1.1);}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Vos Créations</div>
+<div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
+</header>
+
+<div id="mySideMenu" class="side-menu">
+<a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
+<a href="index.html">Home</a>
+<a href="services.html">Services</a>
+<a href="order.html">Order</a>
+<a href="portfolio.html">Portfolio</a>
+</div>
+
+<div class="page-container">
+<h1>Place Your Order</h1>
+<form action="https://formspree.io/f/xqedwvyb" method="POST">
+<input type="text" name="name" placeholder="Full Name" required>
+<input type="email" name="email" placeholder="Email Address" required>
+<input type="tel" name="phone" placeholder="Phone Number" required>
+<select name="service" required>
+<option value="">Select Service</option>
+<option>Logo Design</option>
+<option>Banner & Poster Design</option>
+<option>Social Media Graphics</option>
+<option>Flyers & Brochures</option>
+<option>Web Design / UI Design</option>
+<option>Business Cards / Stationery</option>
+</select>
+<textarea name="notes" placeholder="Additional Notes" rows="4"></textarea>
+<button type="submit">Submit Order</button>
+</form>
+</div>
+
+<div id="ball"></div>
+<a href="https://wa.me/234906920531" class="whatsapp-btn" target="_blank">WhatsApp</a>
+
+<script>
+function openMenu(){document.getElementById("mySideMenu").style.width="250px";}
+function closeMenu(){document.getElementById("mySideMenu").style.width="0";}
+
+const ball=document.getElementById('ball'); 
+let x=100,y=100,vx=3,vy=2,gravity=0.1;
+
+function animateBall(){
+const w=window.innerWidth-25,h=window.innerHeight-25;vy+=gravity;x+=vx;y+=vy;
+if(x<=0||x>=w){vx=-vx; createSplash(x+12,y+12);}
+if(y<=0||y>=h){vy=-vy*0.9; createSplash(x+12,y+12);}
+const elements=document.querySelectorAll('.card,.grid img');elements.forEach(el=>{
+const rect=el.getBoundingClientRect();
+if(x+12>rect.left&&x+12<rect.right&&y+12>rect.top&&y
