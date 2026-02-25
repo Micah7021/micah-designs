@@ -1,40 +1,129 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Vos Créations</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Top golden header */
-        header {
-            background-color: #FFD700;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            font-weight: bold;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vos Créations</title>
+<style>
+body {
+  margin:0; font-family: Arial, sans-serif; overflow-x:hidden; position:relative;
+  background: url('6caa159a93be95af84cca3ea88c78bcd.jpg') center/cover no-repeat;
+}
+header {
+  background: #FFD700; display:flex; justify-content:space-between; align-items:center;
+  padding:15px 20px; position:fixed; width:100%; top:0; z-index:100;
+}
+header .logo {color:black; font-size:28px; font-weight:bold;}
+.hamburger{cursor:pointer;width:30px;height:25px;position:relative;}
+.hamburger span{display:block;height:4px;background:black;margin:5px 0;border-radius:2px;}
+.side-menu{height:100%;width:0;position:fixed;top:0;right:0;background:#111;overflow-x:hidden;
+  transition:0.5s;padding-top:60px;z-index:101;}
+.side-menu a{padding:15px 30px;text-decoration:none;font-size:22px;color:white;display:block;transition:0.3s;}
+.side-menu a:hover{color:gold;}
+.side-menu .close-btn{position:absolute;top:20px;right:25px;font-size:36px;}
+.cover-content {display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100vh;text-align:center;padding-top:80px; color:black;}
+.cover-content h1 {font-size:36px;font-weight:bold;margin-bottom:20px;text-shadow:2px 2px 5px rgba(0,0,0,0.3);}
+.cover-content button {padding:15px 25px;font-size:18px;border:none;border-radius:10px;
+  background:gold;font-weight:bold;cursor:pointer;box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+.cover-content button:hover {background:#e6c200;}
+#ball{position:absolute;width:25px;height:25px;background:gold;border-radius:50%;z-index:0;}
+.splash{position:absolute;width:20px;height:20px;border-radius:50%;background:gold;opacity:0.8;animation:fadeSplash 2s forwards;z-index:0;}
+@keyframes fadeSplash{0%{opacity:0.8;}100%{opacity:0;}}
+.shape {position:absolute;background:gold;opacity:0.6;border-radius:50%;z-index:0;}
+.emoji{position:absolute;font-size:20px;z-index:0;}
+.whatsapp-btn{position:fixed;bottom:25px;right:25px;background:#25D366;color:white;padding:15px 20px;border-radius:50px;font-weight:bold;text-decoration:none;box-shadow:0 5px 15px rgba(0,0,0,0.3);transition:0.3s;z-index:102;}
+.whatsapp-btn:hover{transform:scale(1.1);}
+</style>
+</head>
+<body>
 
-        header .logo {
-            color: black;
-            font-size: 24px;
-        }
+<header>
+  <div class="logo">Vos Créations</div>
+  <div class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></div>
+</header>
 
-        /* Hamburger button */
-        .hamburger {
-            display: block;
-            cursor: pointer;
-            width: 30px;
-            height: 25px;
-            position: relative;
-        }
+<div id="mySideMenu" class="side-menu">
+  <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="order.html">Order</a>
+  <a href="portfolio.html">Portfolio</a>
+</div>
 
-        .hamburger span {
-            display: block;
+<div class="cover-content">
+  <h1>Vos Créations</h1>
+  <button onclick="location.href='services.html'">Our Services</button>
+</div>
+
+<div id="ball"></div>
+<a href="https://wa.me/234906920531" class="whatsapp-btn" target="_blank">WhatsApp</a>
+
+<script>
+function openMenu(){document.getElementById("mySideMenu").style.width="250px";}
+function closeMenu(){document.getElementById("mySideMenu").style.width="0";}
+
+// Bouncing Ball
+const ball=document.getElementById('ball'); 
+let x=100,y=100,vx=3,vy=2,gravity=0.1;
+function animateBall(){
+  const w=window.innerWidth-25,h=window.innerHeight-25;
+  vy+=gravity;x+=vx;y+=vy;
+  if(x<=0||x>=w){vx=-vx; createSplash(x+12,y+12);}
+  if(y<=0||y>=h){vy=-vy*0.9; createSplash(x+12,y+12);}
+  const shapes=document.querySelectorAll('.shape');
+  shapes.forEach(el=>{
+    const rect=el.getBoundingClientRect();
+    if(x+12>rect.left&&x+12<rect.right&&y+12>rect.top&&y+12<rect.bottom){
+      vy=-vy*0.8; createSplash(x+12,y+12);
+    }
+  });
+  ball.style.left=x+'px';
+  ball.style.top=y+'px';
+  requestAnimationFrame(animateBall);
+}
+animateBall();
+function createSplash(l,t){
+  const s=document.createElement('div');
+  s.className='splash';
+  s.style.left=l+'px';
+  s.style.top=t+'px';
+  s.style.transform=`rotate(${Math.random()*360}deg) scale(${0.8+Math.random()*0.5})`;
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),2000);
+}
+
+// 7 Golden Irregular Shapes
+for(let i=0;i<7;i++){
+  const s=document.createElement('div');
+  s.className='shape';
+  s.style.width=(30+Math.random()*50)+'px';
+  s.style.height=(30+Math.random()*50)+'px';
+  s.style.left=Math.random()*window.innerWidth+'px';
+  s.style.top=Math.random()*window.innerHeight+'px';
+  s.style.transform=`rotate(${Math.random()*360}deg)`;
+  document.body.appendChild(s);
+}
+
+// Floating Emojis / Cartoon characters
+const emojis=["🎨","🖌️","💻","✏️","📐","🖍️","🖋️"];
+for(let i=0;i<15;i++){
+  const e=document.createElement('div');
+  e.className='emoji';
+  e.style.left=Math.random()*window.innerWidth+'px';
+  e.style.top=Math.random()*window.innerHeight+'px';
+  e.innerText=emojis[Math.floor(Math.random()*emojis.length)];
+  document.body.appendChild(e);
+  let direction=Math.random()>0.5?1:-1;
+  let speed=0.2+Math.random()*0.3;
+  let posY=parseFloat(e.style.top);
+  function floatEmoji(){posY+=speed*direction;if(posY<0||posY>window.innerHeight-20)direction*=-1;e.style.top=posY+'px';requestAnimationFrame(floatEmoji);}
+  floatEmoji();
+}
+</script>
+
+</body>
+</html>            display: block;
             height: 4px;
             background: black;
             margin: 5px 0;
