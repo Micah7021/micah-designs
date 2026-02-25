@@ -1,1 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vos Créations</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Floating shapes animation */
+        .shape {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: gold;
+            opacity: 0.7;
+            border-radius: 50%;
+            animation: float 8s infinite linear;
+        }
+        .shape.triangle {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 25px solid gold;
+            background: none;
+        }
+        .shape.square {
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+            background: gold;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0.3; }
+        }
+        .hero-container {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .hero-container h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            z-index: 2;
+            color: gold;
+            text-shadow: 0 0 10px #FFD700;
+        }
+        .hero-container p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #ccc;
+            z-index: 2;
+        }
+        .hero-container a button {
+            z-index: 2;
+        }
+        .shape { z-index: 0; }
+    </style>
+</head>
+<body>
 
+<header>
+  Vos Créations
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="order.html">Order</a>
+    <a href="portfolio.html">Portfolio</a>
+  </nav>
+</header>
+
+<div class="hero-container">
+  <h1>Vos Créations</h1>
+  <p>Creative Designs That Elevate Your Brand</p>
+  <a href="services.html"><button>View Our Services</button></a>
+
+  <!-- Animated shapes -->
+  <div class="shape"></div>
+  <div class="shape triangle"></div>
+  <div class="shape square"></div>
+  <div class="shape"></div>
+  <div class="shape triangle"></div>
+  <div class="shape square"></div>
+</div>
+
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/234906920531" class="whatsapp-btn" target="_blank">WhatsApp</a>
+
+<script>
+  const shapes = document.querySelectorAll('.shape');
+  shapes.forEach(shape => {
+    shape.style.left = Math.random() * window.innerWidth + 'px';
+    shape.style.animationDuration = (5 + Math.random() * 5) + 's';
+    shape.style.width = (10 + Math.random() * 20) + 'px';
+    shape.style.height = (10 + Math.random() * 20) + 'px';
+  });
+</script>
+
+</body>
+</html>
